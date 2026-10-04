@@ -66,8 +66,8 @@
     },
     {
       "path": "docs/open_source/README.md",
-      "bytes": 6319,
-      "sha256": "5b2414039a6db5db58f730616989c687f1f3b2082a133194dbe09a2dabc985b2"
+      "bytes": 6406,
+      "sha256": "b73163b277aa61f516985d00797ec35e1ec7a8042ab5f26a4987bef23510650c"
     },
     {
       "path": "docs/open_source/THIRD_PARTY_NOTICES.md",
@@ -871,8 +871,8 @@
     },
     {
       "path": "tools/export_public_source.py",
-      "bytes": 6463,
-      "sha256": "d82203636060749ed510582addca876a5b441f7b40feb5a13c933ae0a522aa3f"
+      "bytes": 7179,
+      "sha256": "944533a01d9d2598d421c1dabfa827f9f2aea2f746a6854571f7fffd3d018434"
     },
     {
       "path": "tools/import_engineering_library.py",

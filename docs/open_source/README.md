@@ -69,7 +69,7 @@ ffprobe -version
 
 仓库包含自行生成的格式/信号夹具及其生成脚本。真实录音、客户报告、工程资料原文/扫描页、私有校准配置及外部标准参考附件不随源码发布。缺少这些材料的测试会标记跳过，**不计为通过**。合法取得并恢复材料后，可用 `--require-external-data` 严格检查。
 
-公共 Windows CI 检查安装、源码回归和源码 wheel。[公开源码验证记录](docs/open_source/VALIDATION.md)登记本机结果和跳过范围。真实麦克风及硬件验收仍需在有设备的 Windows 机器上完成；现有本机验收与公共 CI 分开记录。
+公共 Windows CI 检查安装、源码回归和源码 wheel。[公开源码验证记录](VALIDATION.md)登记本机结果和跳过范围。真实麦克风及硬件验收仍需在有设备的 Windows 机器上完成；现有本机验收与公共 CI 分开记录。
 
 ## 工程资料工具
 
@@ -84,8 +84,8 @@ ffprobe -version
 
 ## 规格、许可与贡献
 
-[原产品规格](REWRITE_PRODUCT_SPEC.md)保留作为历史基准，包含本版本未实现及明确排除的模块；当前功能范围以本文和 [架构与计算说明](docs/open_source/ARCHITECTURE.md)为准。
+[原产品规格](../../REWRITE_PRODUCT_SPEC.md)保留作为历史基准，包含本版本未实现及明确排除的模块；当前功能范围以本文和 [架构与计算说明](ARCHITECTURE.md)为准。
 
-项目原始源码采用 [GPL-3.0-only](LICENSE)。响度编排中的 MoSQITo 派生部分保留 Apache-2.0 归属，见 [NOTICE](NOTICE)与[第三方说明](THIRD_PARTY_NOTICES.md)。公开 Release 当前提供源码；Qt/FFmpeg 等依赖二进制的对应源码及发行材料尚未完整整理，因此不提供现有便携 EXE 的公开下载。
+项目原始源码采用 [GPL-3.0-only](../../LICENSE)。响度编排中的 MoSQITo 派生部分保留 Apache-2.0 归属，见 [NOTICE](../../NOTICE)与[第三方说明](../../THIRD_PARTY_NOTICES.md)。公开 Release 当前提供源码；Qt/FFmpeg 等依赖二进制的对应源码及发行材料尚未完整整理，因此不提供现有便携 EXE 的公开下载。
 
-欢迎提交 [Issue](https://github.com/Shun1989/AutoAcoustics-Pro/issues) 或 Pull Request，详见 [CONTRIBUTING.md](CONTRIBUTING.md)。
+欢迎提交 [Issue](https://github.com/Shun1989/AutoAcoustics-Pro/issues) 或 Pull Request，详见 [CONTRIBUTING.md](../../CONTRIBUTING.md)。

@@ -106,6 +106,17 @@ def main():
         target = destination / relative
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(source, target)
+    # The canonical README is also retained as an export template. Its local
+    # links must resolve when it is opened from docs/open_source as well.
+    readme_template = destination / 'docs/open_source/README.md'
+    def relative_template_link(match):
+        target = match.group(1)
+        if target.startswith(('http:', 'https:', '#')):
+            return match.group(0)
+        target = target.removeprefix('docs/open_source/') if target.startswith('docs/open_source/') else '../../' + target
+        return '](' + target + ')'
+    readme_template.write_text(re.sub(r'\]\(([^)]+)\)', relative_template_link,
+                                     readme_template.read_text(encoding='utf-8')), encoding='utf-8')
     (destination / '.gitattributes').write_text('* -text\n', encoding='utf-8')
     (destination / '.gitignore').write_text(
         '.venv/\n__pycache__/\n*.pyc\n*.egg-info/\n.pytest_cache/\nbuild/\ndist/\n'
