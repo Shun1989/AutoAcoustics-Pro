@@ -1,0 +1,938 @@
+{
+  "schema_version": 1,
+  "version": "0.3.0",
+  "license": "GPL-3.0-only",
+  "scope": "Public source snapshot; original local Git history is not exported.",
+  "excluded": [
+    "real audio",
+    "private calibration profiles",
+    "customer reports",
+    "engineering PDF/text/page images",
+    "knowledge databases",
+    "external reference datasets",
+    "vendor binaries and SDKs",
+    "local Git history"
+  ],
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 9,
+      "sha256": "8b9c3028d6467ff3be7c793141927841d70f47f52d0590677438f488ca154992"
+    },
+    {
+      "path": ".github/workflows/windows.yml",
+      "bytes": 1294,
+      "sha256": "d86fd694006db8949404b6ae2e58836c604520aaa27df8ec465f4941ea17a034"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 326,
+      "sha256": "fec7667acf179223c1568a1b04c377e26bf174a8203f8d6b4cd8914b28a7298a"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "bytes": 1245,
+      "sha256": "115a540187be18ededdccc13417e96d278f2d5e85c27b90a940e77db7da8e4ef"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 35147,
+      "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903"
+    },
+    {
+      "path": "NOTICE",
+      "bytes": 1022,
+      "sha256": "a4b6a347f75c9ae7831caa2606b29c47359253b0288faa08d1f2583b0b4e51d2"
+    },
+    {
+      "path": "README.md",
+      "bytes": 6319,
+      "sha256": "5b2414039a6db5db58f730616989c687f1f3b2082a133194dbe09a2dabc985b2"
+    },
+    {
+      "path": "REWRITE_PRODUCT_SPEC.md",
+      "bytes": 45544,
+      "sha256": "3d1e135cdb1b4a967c8aab334086f1d3297ef79ef409cf0b9eb51e04de7d1f64"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "bytes": 2169,
+      "sha256": "cfbbb14bd65b6cf4cc189e8f4fb59421e20efd8fedc3e442b8dbc27833d04d92"
+    },
+    {
+      "path": "docs/open_source/ARCHITECTURE.md",
+      "bytes": 2404,
+      "sha256": "9e6239a45e45784cefa7acc7aae14f03f7fea685123b9f1d6bf068fcf26f0f74"
+    },
+    {
+      "path": "docs/open_source/README.md",
+      "bytes": 6319,
+      "sha256": "5b2414039a6db5db58f730616989c687f1f3b2082a133194dbe09a2dabc985b2"
+    },
+    {
+      "path": "docs/open_source/THIRD_PARTY_NOTICES.md",
+      "bytes": 2169,
+      "sha256": "cfbbb14bd65b6cf4cc189e8f4fb59421e20efd8fedc3e442b8dbc27833d04d92"
+    },
+    {
+      "path": "docs/open_source/VALIDATION.md",
+      "bytes": 1633,
+      "sha256": "2609d0dd81a4212662d04c95d5e8725577502976098c7da26ffcc3b70faef4ea"
+    },
+    {
+      "path": "docs/open_source/ci.yml",
+      "bytes": 1294,
+      "sha256": "d86fd694006db8949404b6ae2e58836c604520aaa27df8ec465f4941ea17a034"
+    },
+    {
+      "path": "launcher.py",
+      "bytes": 1846,
+      "sha256": "c6d0008f7fd42c35cdbb8f24cf1cee1a6ec537029d75d42ce7361e4dbf0f6793"
+    },
+    {
+      "path": "licenses/source/Apache-2.0.mosqito.txt",
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "path": "pyproject.toml",
+      "bytes": 920,
+      "sha256": "231d5314c74ca8a27b991738560f4f2c71941c2ec8af04fc2eb35380594e5d93"
+    },
+    {
+      "path": "requirements.lock",
+      "bytes": 1145,
+      "sha256": "824b7234d5d0e5d0ca894c2068ed80cbe57710638f9c9191779eefcfa59513c5"
+    },
+    {
+      "path": "src/autoacoustics/__init__.py",
+      "bytes": 79,
+      "sha256": "dca9ea3d4aade1e1546127006899e823d78d09df369c9cea88b660301c168214"
+    },
+    {
+      "path": "src/autoacoustics/acquisition/__init__.py",
+      "bytes": 616,
+      "sha256": "8b01447535b346f491ed5180f87667c0c9720c709722ea7ee48b1532ee6350b9"
+    },
+    {
+      "path": "src/autoacoustics/acquisition/device.py",
+      "bytes": 8962,
+      "sha256": "a017190a2ac3e66bc19478545591fb18f6d2f40f2f13d121cc28dd791e975a23"
+    },
+    {
+      "path": "src/autoacoustics/acquisition/engine.py",
+      "bytes": 11734,
+      "sha256": "def2d87224fdae4f2badd7b9e181130e3fe544f056552b5174b48ee7f6911ef8"
+    },
+    {
+      "path": "src/autoacoustics/acquisition/head_recorder.py",
+      "bytes": 6904,
+      "sha256": "8cf95a1d9322f9172734baa34451383764bd930a7b97aaa06b4a16ddea2adc7a"
+    },
+    {
+      "path": "src/autoacoustics/acquisition/ni_daqmx.py",
+      "bytes": 19477,
+      "sha256": "0d966d99e32cba1a134a78a4a2582542d61c405fb189dd92e4e46a43a93b6e33"
+    },
+    {
+      "path": "src/autoacoustics/acquisition/replay.py",
+      "bytes": 5629,
+      "sha256": "eca6616ef2c5c7a808d0450a2641a99709d27420a1dd4217aabbee8f6aaedc8f"
+    },
+    {
+      "path": "src/autoacoustics/acquisition/soundcard.py",
+      "bytes": 24332,
+      "sha256": "b3ddcfc63a04aaf239695d5a4732b5ca87ec14c2d301cb78c01b64670e1f35f5"
+    },
+    {
+      "path": "src/autoacoustics/acquisition/storage.py",
+      "bytes": 18421,
+      "sha256": "f0e025a15ac6ed3f39bb70af7997fe30961c792e18debd32c095de9558377748"
+    },
+    {
+      "path": "src/autoacoustics/analysis/_loudness_engine.py",
+      "bytes": 16271,
+      "sha256": "333614652122b983aae9a0bb38c720aaa48cec6da265fbc9026d948e978fbb27"
+    },
+    {
+      "path": "src/autoacoustics/analysis/comparison.py",
+      "bytes": 2206,
+      "sha256": "dc2d6c34170a738989227c11a48edba17a9bee726dd2a54760bce78a242575d7"
+    },
+    {
+      "path": "src/autoacoustics/analysis/loudness.py",
+      "bytes": 2522,
+      "sha256": "857ed001379819ccf3b1dfcbdfb0ad02bef5b7c0c73d77a75446715b76a393e7"
+    },
+    {
+      "path": "src/autoacoustics/analysis/octave.py",
+      "bytes": 2059,
+      "sha256": "94248492c055181a09148e6d370c1752fc59cd74355e3c0573663357edc19f70"
+    },
+    {
+      "path": "src/autoacoustics/analysis/pipeline.py",
+      "bytes": 11993,
+      "sha256": "06affd73c00bca225989c4a54dd4a82dac2633354ebcb0446ce13212945dfea2"
+    },
+    {
+      "path": "src/autoacoustics/analysis/repeats.py",
+      "bytes": 3325,
+      "sha256": "8408bb153a8076ce1125fb3242eb448bea7e34edf9eba6e53c865e29b8e6af97"
+    },
+    {
+      "path": "src/autoacoustics/analysis/rotation.py",
+      "bytes": 30451,
+      "sha256": "f86aa7a62f8b4d49643eb86c12d502936fdda2612f3ccfeb6040e3ffce26ee77"
+    },
+    {
+      "path": "src/autoacoustics/analysis/spectrum.py",
+      "bytes": 3080,
+      "sha256": "e5347fbb13358a37a6e9745130855e53ebeeb93083887678712d0954e71912a4"
+    },
+    {
+      "path": "src/autoacoustics/analysis/spl.py",
+      "bytes": 2998,
+      "sha256": "02887cc1ccd4d998b29cbffd2936a634365ceca6852fab0b3012d824d7a501ba"
+    },
+    {
+      "path": "src/autoacoustics/app.py",
+      "bytes": 4182,
+      "sha256": "9a81d9bbc1bd8c0873b3077bb12098e5c1a8917b7dd3b809eeb1550dbe8d10b6"
+    },
+    {
+      "path": "src/autoacoustics/batch.py",
+      "bytes": 9229,
+      "sha256": "53a09f2d5f678af05c6894e48af8cd715f13881ac999f6b6f2c5b224873c4e15"
+    },
+    {
+      "path": "src/autoacoustics/calibration.py",
+      "bytes": 7279,
+      "sha256": "b6e916d2b46362e8b6f55b7da9d710e561eda92951e84543d949a19abbfa618d"
+    },
+    {
+      "path": "src/autoacoustics/importers/__init__.py",
+      "bytes": 139,
+      "sha256": "0fa15ac8126e9e537ea37247147ad421dd47d96f76a67be73def08d4eb0c6501"
+    },
+    {
+      "path": "src/autoacoustics/importers/audio.py",
+      "bytes": 5356,
+      "sha256": "159160f2614f3520f8683eeb00c8dd6bc8f33830ce2ab32ee3bf43c5fdf0af02"
+    },
+    {
+      "path": "src/autoacoustics/importers/common.py",
+      "bytes": 3724,
+      "sha256": "2d0dd43e56ccb97aacbe4c2cb0b6f248d2e06baae972639246b2711a3adffbf2"
+    },
+    {
+      "path": "src/autoacoustics/importers/head.py",
+      "bytes": 14304,
+      "sha256": "94340fd9172c6df8fb59c24a67d93652ba30e04fad456ea1dd599c805e7300ea"
+    },
+    {
+      "path": "src/autoacoustics/importers/media.py",
+      "bytes": 6404,
+      "sha256": "f7a124d2fbe850bbfcea19a62d0ec06e47053c5db063207387a0f0c12dd3eaa5"
+    },
+    {
+      "path": "src/autoacoustics/importers/registry.py",
+      "bytes": 3177,
+      "sha256": "4bfca2944f342186f874ba72df0600e4668ef77d713cc496107a1e543c4741d4"
+    },
+    {
+      "path": "src/autoacoustics/importers/scientific.py",
+      "bytes": 15935,
+      "sha256": "6714ea23fdbf780000a94c273b507ff6a72efdc56712267d82155dc50fe8c048"
+    },
+    {
+      "path": "src/autoacoustics/importers/tabular.py",
+      "bytes": 8761,
+      "sha256": "91364af81d8b4ee596f5209eeb8331bea4bece5457e7642473fb6035efd41ba9"
+    },
+    {
+      "path": "src/autoacoustics/jobs.py",
+      "bytes": 12206,
+      "sha256": "9a19551aa50eb82295bfeac6063f4da012943086de74a73b1f8d64e8b66fbe5b"
+    },
+    {
+      "path": "src/autoacoustics/knowledge/__init__.py",
+      "bytes": 369,
+      "sha256": "a5c6150c8abfc13c2796aaaf71fdcbcc49198142195d8ab3336ae7593ab55db2"
+    },
+    {
+      "path": "src/autoacoustics/knowledge/answer.py",
+      "bytes": 14147,
+      "sha256": "3ba422d74e8e7106cddca04ed9e7c45d6170c431499b81f0f020abf202c4f51c"
+    },
+    {
+      "path": "src/autoacoustics/knowledge/corpus.py",
+      "bytes": 14272,
+      "sha256": "c721f57de76170eb2c7714c23b50a9085eea54752c035df489fcca208415d2e1"
+    },
+    {
+      "path": "src/autoacoustics/knowledge/credentials.py",
+      "bytes": 4684,
+      "sha256": "fb0414f283cf69e7947c156a25f73d5786263d930e1b3abdb6ff103249c146a6"
+    },
+    {
+      "path": "src/autoacoustics/knowledge/importers.py",
+      "bytes": 5204,
+      "sha256": "edb3b858293c264dbb6b760b0fbb495ee5f951d930b3f356e658352a36f477c6"
+    },
+    {
+      "path": "src/autoacoustics/knowledge/models.py",
+      "bytes": 4450,
+      "sha256": "3d31a4f1c509b5e2b7ac3c78d899b7e770f362d4cf15e9f65f8f28e5ce3d3a01"
+    },
+    {
+      "path": "src/autoacoustics/knowledge/provider.py",
+      "bytes": 9316,
+      "sha256": "1a0237c07b67c500d641026f74f1fa3004116e532175f115a190b379bdb59cfc"
+    },
+    {
+      "path": "src/autoacoustics/knowledge/search.py",
+      "bytes": 3573,
+      "sha256": "7f0be6e4e7468e38fd39c1930a8ef52d88efc7a94cb5bc3423e9d951fdfe8139"
+    },
+    {
+      "path": "src/autoacoustics/knowledge/store.py",
+      "bytes": 17231,
+      "sha256": "f60e4ed80f01c473035410a58e0a8ac33c4b4c35dc806c1a790a6565fbf7c996"
+    },
+    {
+      "path": "src/autoacoustics/knowledge/text.py",
+      "bytes": 1689,
+      "sha256": "4e7c9587335c040af4a6ca691172798f55a1c87e89794a8614d9fbcf1aeb7114"
+    },
+    {
+      "path": "src/autoacoustics/knowledge_validation.py",
+      "bytes": 18722,
+      "sha256": "7bed94f325954f49d13d2ecf16942d3cdb82f300102a72ea72dc98b76381ca80"
+    },
+    {
+      "path": "src/autoacoustics/live_validation.py",
+      "bytes": 7169,
+      "sha256": "02f4bc41e025b3a56e63d970d69d758a5719f6e854e59ce4182f3f93a3b1297c"
+    },
+    {
+      "path": "src/autoacoustics/model.py",
+      "bytes": 15142,
+      "sha256": "4508792777aa9674d8af5aff063e06535c4eb2ae0ea2b0244a081d70be560712"
+    },
+    {
+      "path": "src/autoacoustics/project.py",
+      "bytes": 10811,
+      "sha256": "727a1adafb6cee19f3a9ca21f68d8cc846547ab8594dca3dde69cf184395ecbc"
+    },
+    {
+      "path": "src/autoacoustics/qt_lifecycle.py",
+      "bytes": 2620,
+      "sha256": "8acd225887fc59ace5fb07c318d28cf1dd44de4299376559fa80dc4675026f3a"
+    },
+    {
+      "path": "src/autoacoustics/report.py",
+      "bytes": 37061,
+      "sha256": "45758e399480fff2c99ac4a000aea10997fe073cf858da5d57619027aa7e798c"
+    },
+    {
+      "path": "src/autoacoustics/resource_probe.py",
+      "bytes": 2544,
+      "sha256": "5fbaff899476e97e1d6fe5fbc70f3e29ddb3ab7889dac5a841c5da2da6e997f7"
+    },
+    {
+      "path": "src/autoacoustics/resources.py",
+      "bytes": 749,
+      "sha256": "9fcf4d6c4923958a02585b0694e703d8418c4a968ae210f6efbbd53dff61defd"
+    },
+    {
+      "path": "src/autoacoustics/ui/__init__.py",
+      "bytes": 33,
+      "sha256": "127b1db7f3ac9a446966e46563556fcdc8731777f2e8cd52e636afce5d1c8ebd"
+    },
+    {
+      "path": "src/autoacoustics/ui/acquisition_dialog.py",
+      "bytes": 29350,
+      "sha256": "749ba0a61a98066453126e593fe2c0fed11b227c23f53b8d2ae227ffbe65ce3c"
+    },
+    {
+      "path": "src/autoacoustics/ui/batch_panel.py",
+      "bytes": 14350,
+      "sha256": "9718e0b8ceb5351efcf001f6eee9037cd586c8a450a611d2745834ef90e40f92"
+    },
+    {
+      "path": "src/autoacoustics/ui/calibration_dialog.py",
+      "bytes": 4259,
+      "sha256": "da34bff42ef8e48643da71b8244f906309639baacd670c09cb2cf4659145e200"
+    },
+    {
+      "path": "src/autoacoustics/ui/context_dialog.py",
+      "bytes": 2175,
+      "sha256": "afb5d967315ebcf893af7e52db639cf0d71ba6176ae1025fabcc97cec42b7c19"
+    },
+    {
+      "path": "src/autoacoustics/ui/formatting.py",
+      "bytes": 1699,
+      "sha256": "decda708c6ebacfd0f9ef61dc280ced3a8142dfc919c987b54b5102463728cef"
+    },
+    {
+      "path": "src/autoacoustics/ui/import_dialog.py",
+      "bytes": 4257,
+      "sha256": "d1bb136794538db8e6c79066960a4fe08501f271440b6ab9211269705aa7d4de"
+    },
+    {
+      "path": "src/autoacoustics/ui/knowledge_dialog.py",
+      "bytes": 42854,
+      "sha256": "78d64c0c9008bb500f02629767b292a88e13d41f6eedf3dc512141f73e432948"
+    },
+    {
+      "path": "src/autoacoustics/ui/main_window.py",
+      "bytes": 64458,
+      "sha256": "ef509e859bfbbe3eefb30b745a6b7fd22b9a175cea82666075e533d4126be7dc"
+    },
+    {
+      "path": "src/autoacoustics/ui/playback.py",
+      "bytes": 4252,
+      "sha256": "9f507b5e7702ea3a6c89634211888d93bf55c17f5ce813912df02342552029a7"
+    },
+    {
+      "path": "src/autoacoustics/ui/plots.py",
+      "bytes": 28031,
+      "sha256": "9cbbd20e88ac2efe35596cb2d847fc050e2d0b01725bc3348b861eb36dbd3d0d"
+    },
+    {
+      "path": "src/autoacoustics/ui/rotation_panel.py",
+      "bytes": 24996,
+      "sha256": "0223ee02a262d29713b6f39cdbca560c7c0cb1e6d15927ea28d5840733ee56ca"
+    },
+    {
+      "path": "src/autoacoustics/ui/soundcard_panel.py",
+      "bytes": 26840,
+      "sha256": "fdabf5c3f7fd51cf021ac7b82d805bbb6997a9209f55471686051d5ed4b4a96d"
+    },
+    {
+      "path": "src/autoacoustics/ui/window_geometry.py",
+      "bytes": 1649,
+      "sha256": "2fa9d55806013a46ebdf4d25abb3a643c251c38045c219cf854583323f0d99eb"
+    },
+    {
+      "path": "src/autoacoustics/ui/workbench.py",
+      "bytes": 13844,
+      "sha256": "1917646deeabdd4938c12d548e3eb176b3f2c348ba7800e3924e8f2e9a89e1f8"
+    },
+    {
+      "path": "src/autoacoustics/validation.py",
+      "bytes": 32170,
+      "sha256": "9792f9cfe9d8f3d730d30f89e329bf5577bfbd1651e70aefbcd74d3ca702e433"
+    },
+    {
+      "path": "tests/conftest.py",
+      "bytes": 4756,
+      "sha256": "7d7902d953a2107d557dbdf6fe925544c305324e255f18855403e974311a45db"
+    },
+    {
+      "path": "tests/fixtures/imports/24位.wav",
+      "bytes": 144044,
+      "sha256": "733ead1bb2072bb7723226d46e370a971998a1747fc6951a9635500109b2cf60"
+    },
+    {
+      "path": "tests/fixtures/imports/MAT73样例.mat",
+      "bytes": 393088,
+      "sha256": "6893363b3db148bc1c41efddcfd5ea7d336d75f25a7bc2b4a8f490a92ea3aaca"
+    },
+    {
+      "path": "tests/fixtures/imports/fixture_manifest.json",
+      "bytes": 7377,
+      "sha256": "702bd676011b4ffb7502cd00d5b2f6246a0482ba83573d67a629811db350d4c5"
+    },
+    {
+      "path": "tests/fixtures/imports/generate.py",
+      "bytes": 6010,
+      "sha256": "9f1f0a2ec41ccfef3dbfb381916d9725bd06e41134e49883640240366f742459"
+    },
+    {
+      "path": "tests/fixtures/imports/样例.aac",
+      "bytes": 8249,
+      "sha256": "e5ab11670e58461ce24ac60248b8ec1bd9516a965298efc48bf8c06a31349766"
+    },
+    {
+      "path": "tests/fixtures/imports/样例.avi",
+      "bytes": 106380,
+      "sha256": "4551014b1204e28c90b1e1e8e1c9c68795873198f100e552a5e7a693752125da"
+    },
+    {
+      "path": "tests/fixtures/imports/样例.csv",
+      "bytes": 1342261,
+      "sha256": "fb594398a1baad6dff6509a71f71c62d1267a2e2587ecfda1d1107c92ac93fcf"
+    },
+    {
+      "path": "tests/fixtures/imports/样例.dat",
+      "bytes": 982229,
+      "sha256": "b4b07787367b0f503f6ae16d56e674978cc03f73201fda6e03adfabd475dfb75"
+    },
+    {
+      "path": "tests/fixtures/imports/样例.flac",
+      "bytes": 49104,
+      "sha256": "8f0ac9f3e02c8175b30dbe5041251b179ca4b44d9bf86ceb7385a0d4b08ffc72"
+    },
+    {
+      "path": "tests/fixtures/imports/样例.hdf5",
+      "bytes": 392576,
+      "sha256": "34049ceebe304860697b91703fc1f5424cc15b4cce146d62b0dd0af710927b91"
+    },
+    {
+      "path": "tests/fixtures/imports/样例.m4a",
+      "bytes": 8981,
+      "sha256": "75dc845ccad265a29ac2c24d8f77d40da028454cb7d1f861e6c7d9fd9114b223"
+    },
+    {
+      "path": "tests/fixtures/imports/样例.mat",
+      "bytes": 384504,
+      "sha256": "3cc1b9164e9dc295f100f4ce9a4e400eacfd7db1b309217f7a5774c338a4ee91"
+    },
+    {
+      "path": "tests/fixtures/imports/样例.mkv",
+      "bytes": 96956,
+      "sha256": "e3ad432cc18d57871675258f279d5933a90522583d9a214c6b1d7aecbf03b34c"
+    },
+    {
+      "path": "tests/fixtures/imports/样例.mp3",
+      "bytes": 8685,
+      "sha256": "06f98ea069c6915aa2d1f3ffe6eefa21cbb96d5214e8e936ab6c08ef76ce2d89"
+    },
+    {
+      "path": "tests/fixtures/imports/样例.mp4",
+      "bytes": 9811,
+      "sha256": "009d30f06cff1486f4a2808ad6f77afd35b0f07e0d843211a01b3722446aa4b6"
+    },
+    {
+      "path": "tests/fixtures/imports/样例.ogg",
+      "bytes": 6295,
+      "sha256": "b0df217a3ef3e04d43a7e124f477aba8c8a332ad2ef98d20c259dab372318996"
+    },
+    {
+      "path": "tests/fixtures/imports/样例.tdms",
+      "bytes": 384263,
+      "sha256": "9a27d58dd969fa6bc2acc327d3a0eb14f3ac4ba30712cd01cbb5a4e438822f3e"
+    },
+    {
+      "path": "tests/fixtures/imports/样例.txt",
+      "bytes": 982281,
+      "sha256": "ed3a25002af7d0085fa253d7067d39b20091931240bc9fe24e6e3dd378748e54"
+    },
+    {
+      "path": "tests/fixtures/imports/样例.wav",
+      "bytes": 96044,
+      "sha256": "c4ca373dba939fa16ce6593f277e3b983abc0f80286148dcdbc13949db989073"
+    },
+    {
+      "path": "tests/fixtures/imports/浮点.wav",
+      "bytes": 192088,
+      "sha256": "4f0620f6abe813d48342d8f58e132685c5e55cbc908a40492aabf03083d0022c"
+    },
+    {
+      "path": "tests/reference/head_pa_reader.py",
+      "bytes": 6321,
+      "sha256": "8fddbef2ca4e8bd753ff1765e8a040fbeddcba36a270170d03abe7ebf4cac429"
+    },
+    {
+      "path": "tests/reference/upstream/LICENSE.mosqito.txt",
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "path": "tests/test_acquisition.py",
+      "bytes": 11161,
+      "sha256": "7b004d1381240b4d47439aba956c3bf43af03d3573f39bda820fe1f0a1e62558"
+    },
+    {
+      "path": "tests/test_acquisition_import.py",
+      "bytes": 7060,
+      "sha256": "ae0885f1a33b4b27c7d0886c98f489ba9604e2d73cae7c5f5cf606344d98ab1c"
+    },
+    {
+      "path": "tests/test_acquisition_replay.py",
+      "bytes": 2222,
+      "sha256": "40aa7b09cac4e6f781523967b3715bd767404c6fbcaaf050765b42780976e56e"
+    },
+    {
+      "path": "tests/test_acquisition_ui.py",
+      "bytes": 9871,
+      "sha256": "7ba711f3632d5c47c33b4648c3cbe3d5eb6d1ba45798caac989b045094b574b8"
+    },
+    {
+      "path": "tests/test_batch.py",
+      "bytes": 5828,
+      "sha256": "eb4e7b6a0fdfc1fedde221f00072cbe1e7059e59977d0c409d2d87ba605bcd8a"
+    },
+    {
+      "path": "tests/test_batch_workspace.py",
+      "bytes": 8287,
+      "sha256": "df8ff886d1eecd83b6ca891b429fc92bdd9e55eac7d526b23714688c68f3dcc9"
+    },
+    {
+      "path": "tests/test_calibration.py",
+      "bytes": 3978,
+      "sha256": "d84c3d3d03c6cb589d902c7cea1a750e8e9434b855b8d0ced46220fd0384a95a"
+    },
+    {
+      "path": "tests/test_comparison.py",
+      "bytes": 1548,
+      "sha256": "7373d09bad4afc18c6094199156cfb52db4070349f982b8d717fac6c5fd3daca"
+    },
+    {
+      "path": "tests/test_distribution_notices.py",
+      "bytes": 7270,
+      "sha256": "b7d814ab26292c868a2c755554344469fb9f3c014120687a19404a03eafcd2e1"
+    },
+    {
+      "path": "tests/test_docx_structure.py",
+      "bytes": 2346,
+      "sha256": "766ad94c678355e7cdaaba0f771e37bde0495f673bf26f035eb6596d26d93f78"
+    },
+    {
+      "path": "tests/test_head_acquisition.py",
+      "bytes": 4695,
+      "sha256": "71b642e13345514262e22bbae0d3d787dc2429a8d910c00d8ff2a7d287a2b9ad"
+    },
+    {
+      "path": "tests/test_head_hdf.py",
+      "bytes": 12284,
+      "sha256": "8ea61b10fa44868c4cf0c84976657d7169a73813b134934404038299f718c8de"
+    },
+    {
+      "path": "tests/test_import_audio.py",
+      "bytes": 6070,
+      "sha256": "af96ded0dca9fdcc4385df7a5313c5f409ac85ddf2ad55b75aabeb5d21dff9e1"
+    },
+    {
+      "path": "tests/test_import_media.py",
+      "bytes": 5205,
+      "sha256": "bf3a9a1c6f6d3b0b2a8f6d540c7dd862c181a579c18f4e5a50eb50a590091ddd"
+    },
+    {
+      "path": "tests/test_import_scientific.py",
+      "bytes": 9812,
+      "sha256": "7f9aa6083b66f9257ebf409ed9152b70a100af949c01fdc1bfa96417bee58fe4"
+    },
+    {
+      "path": "tests/test_import_tabular.py",
+      "bytes": 4832,
+      "sha256": "5c21acb9fec2e5dc458628bcd37222be14156bb32a4784cd51fc7b2f4d804edc"
+    },
+    {
+      "path": "tests/test_jobs.py",
+      "bytes": 6212,
+      "sha256": "b42665798017cb99267f9726bc248c2cbd625366a25241b0f4ead8b374cae3ef"
+    },
+    {
+      "path": "tests/test_knowledge_acceptance.py",
+      "bytes": 8771,
+      "sha256": "3f4463b21a610eb1e4ffd04bdca3d457ae280494c7b7d535873699026b86a16b"
+    },
+    {
+      "path": "tests/test_knowledge_answer.py",
+      "bytes": 7085,
+      "sha256": "7c2fd1b0757619f2ae0e915f9ee6e25cca780cefcd7b62b5aee57926691ce4f7"
+    },
+    {
+      "path": "tests/test_knowledge_corpus.py",
+      "bytes": 16422,
+      "sha256": "46d2ac120d111415fd07abe8107fc36832414856173ef3f5de17569d5d97a76b"
+    },
+    {
+      "path": "tests/test_knowledge_import.py",
+      "bytes": 1712,
+      "sha256": "02c90fe9a388bd6425da870859748ed605a9551ad502f47e512694a00656a485"
+    },
+    {
+      "path": "tests/test_knowledge_provider.py",
+      "bytes": 4788,
+      "sha256": "1120fd54f4a20b48b923b99339eced2a834e40530365f1dadf27d73a52aaea9c"
+    },
+    {
+      "path": "tests/test_knowledge_release.py",
+      "bytes": 3020,
+      "sha256": "977a37178c5ddad2cfa0d303b40dd0f75d29fbe248d630efb014ad2396d10f4d"
+    },
+    {
+      "path": "tests/test_knowledge_search.py",
+      "bytes": 1560,
+      "sha256": "c38f8e8ddf8ebc123f01738907f3f657a7ec519f250b9535f0f05f4c8bae1f0b"
+    },
+    {
+      "path": "tests/test_knowledge_store.py",
+      "bytes": 4881,
+      "sha256": "e80eba5df0b4746e55eedcd77428fe22969f48cfb26a0c7e19d00be1b8cd82a6"
+    },
+    {
+      "path": "tests/test_knowledge_ui.py",
+      "bytes": 7135,
+      "sha256": "6eb561c146550bb320718bc08133b6290346c3400cd08fd6ed142188dcc49abc"
+    },
+    {
+      "path": "tests/test_live_nvh_integration.py",
+      "bytes": 3445,
+      "sha256": "07f9ce2e0c5fcd735e9d982af888b63264dfb5b016ef8e15810821902afe8371"
+    },
+    {
+      "path": "tests/test_live_nvh_ui.py",
+      "bytes": 11613,
+      "sha256": "b7a3c29a0ecd98bd0d38b42891d743418c124c838ea11fae04defb1d1d3ebe86"
+    },
+    {
+      "path": "tests/test_loudness.py",
+      "bytes": 1058,
+      "sha256": "03fdcea40c724f1920968b5413daaafce93ce374edac29da5039e16bf8899134"
+    },
+    {
+      "path": "tests/test_loudness_engine.py",
+      "bytes": 4895,
+      "sha256": "c3e007298074dea5a6ae9574ede2d988371a8c08a5e9aa0a3a692ab79cc0ac3c"
+    },
+    {
+      "path": "tests/test_loudness_extended_reference.py",
+      "bytes": 12083,
+      "sha256": "0ee5949cece38bf591de97ce30d59fc452fee3ae71872b5a69201fe28d9b954b"
+    },
+    {
+      "path": "tests/test_loudness_reference.py",
+      "bytes": 2518,
+      "sha256": "9a455fe62eb54b13d0fb5d193e6e353f46d63f70bfa7738a83f203861765c21e"
+    },
+    {
+      "path": "tests/test_loudness_stationary_extended_reference.py",
+      "bytes": 10498,
+      "sha256": "897094b770e10d857ab6d2202d6aef178beb2b50127998d17215a13f0448e191"
+    },
+    {
+      "path": "tests/test_model.py",
+      "bytes": 6597,
+      "sha256": "d2c6287128b35ee8f576c6fd765e2ec299efc7a72d5449fb9ec55290d88cc05f"
+    },
+    {
+      "path": "tests/test_ni_backend.py",
+      "bytes": 22379,
+      "sha256": "8bd28edbc33621f0752d4415d1388e5506c276c51f741873c75ecf84c86c6129"
+    },
+    {
+      "path": "tests/test_octave.py",
+      "bytes": 3903,
+      "sha256": "bcaaf25e66c68f7e78275f3d730bd465a8262822baab2d00800dc14ab8204216"
+    },
+    {
+      "path": "tests/test_pipeline.py",
+      "bytes": 6371,
+      "sha256": "b54066a0026f226b1032defee341f66ac53d410aefd3ff2dc2b37a12c31de537"
+    },
+    {
+      "path": "tests/test_playback.py",
+      "bytes": 3253,
+      "sha256": "c24ade5546ab15767144fb17bc73d22f001c89c4cde35279304afac9efd68ac9"
+    },
+    {
+      "path": "tests/test_plot_dashboard.py",
+      "bytes": 11980,
+      "sha256": "0ff9522b2004874de7bee06cdfa332a2423d6a8902cbf9dee1070b1b724fba13"
+    },
+    {
+      "path": "tests/test_project.py",
+      "bytes": 8899,
+      "sha256": "bbd03f7993759b383882432971f401f2572d383ec4cd2657091758ec75c488e2"
+    },
+    {
+      "path": "tests/test_qt_lifecycle.py",
+      "bytes": 2815,
+      "sha256": "4500f0662dd3ba1a430f982b7bde5e3dd35effa67ec3c29ae052eb3c792df9cd"
+    },
+    {
+      "path": "tests/test_real_calibration.py",
+      "bytes": 551,
+      "sha256": "af3a40a5d9be011eb12c24c6d411af08dc8af76602c2d41350dddeeaa287c797"
+    },
+    {
+      "path": "tests/test_real_head_hdf.py",
+      "bytes": 3055,
+      "sha256": "3df4bf663f45f226663fb9eddc9efe56153de31d3ab30142688bc0b9931f0c5d"
+    },
+    {
+      "path": "tests/test_real_wav_import.py",
+      "bytes": 1873,
+      "sha256": "9bc7b6c440e4d68762624535c60b7ba7d440a3f803d49c400c6acf3b7cea3917"
+    },
+    {
+      "path": "tests/test_reference_manifest.py",
+      "bytes": 10719,
+      "sha256": "0b5fac236c68d4cb391d8ea38de1956ff9ee9a5a28d5c636531da41723db5ec4"
+    },
+    {
+      "path": "tests/test_repeats.py",
+      "bytes": 5253,
+      "sha256": "4491c1fa6557068c317e59cf72752f74bf0787fcee8a68a3d9e715746226cca7"
+    },
+    {
+      "path": "tests/test_report.py",
+      "bytes": 13771,
+      "sha256": "6d1e05cc9ad6d238c2283c0d4329421c1484a28d98a199fda91d3695bfc486f5"
+    },
+    {
+      "path": "tests/test_rotation.py",
+      "bytes": 9970,
+      "sha256": "44219c1c5c6e067c7def7135a3ca28691138e80dc0b74ce2d323529f4c4ba9a1"
+    },
+    {
+      "path": "tests/test_soundcard.py",
+      "bytes": 17517,
+      "sha256": "f128f8deafe120a7d075c370b925de1cf6dd586f921a641fbe0481f516f09485"
+    },
+    {
+      "path": "tests/test_spectrum.py",
+      "bytes": 5615,
+      "sha256": "bd814f1a24d5804038b485440efef942b60637ea69f9347e53a12894de34a29e"
+    },
+    {
+      "path": "tests/test_spl.py",
+      "bytes": 3405,
+      "sha256": "042c7f0185bdfe924dfbcac25a18bbfbc810616ae8c5c9f73daddba1d1e7d942"
+    },
+    {
+      "path": "tests/test_ui_context_restore.py",
+      "bytes": 2605,
+      "sha256": "e2beb8f68478b5eed72b414556ff2003694e2046f39a0b8d79169d97eadddda2"
+    },
+    {
+      "path": "tests/test_ui_end_to_end.py",
+      "bytes": 6593,
+      "sha256": "71d4761732a68486127d00866b1f2314d5522a0cb3729b27dacf465a60f51f65"
+    },
+    {
+      "path": "tests/test_ui_flow.py",
+      "bytes": 10454,
+      "sha256": "59ff25b400035470be0972a5193cebee774f0f0b5aded353a544051add046a9a"
+    },
+    {
+      "path": "tests/test_ui_plots.py",
+      "bytes": 3044,
+      "sha256": "44fd264d9f4ee0115934649106c8aee77cc13da63f12b99d82c185571daa4e51"
+    },
+    {
+      "path": "tests/test_ui_repeats.py",
+      "bytes": 6211,
+      "sha256": "ca5a3dd15cdda898755605c23d31451c9224ca34c0e8f91290076fd3cdb27fa1"
+    },
+    {
+      "path": "tests/test_workbench_experience.py",
+      "bytes": 7326,
+      "sha256": "9e959a72ef328030ca2c38d0d470a388d99a68c6394e82c68e8d281652a7e974"
+    },
+    {
+      "path": "tools/build_knowledge_corpus.py",
+      "bytes": 37023,
+      "sha256": "722e63b8c76500118e418720598d8cf170eaa637bd0a23ef98f9fb4e61699da7"
+    },
+    {
+      "path": "tools/build_reference_manifest.py",
+      "bytes": 12329,
+      "sha256": "f70d48f9d142a0ddf5ab40fd7f911ef6d7777ad425b283e616ed36852c519806"
+    },
+    {
+      "path": "tools/build_windows.py",
+      "bytes": 4359,
+      "sha256": "ecc384c0cb4065e3b99fb12943747fb2c6a9779c7e0ca5a551ebd34fa8ca7078"
+    },
+    {
+      "path": "tools/check_frozen_reports.py",
+      "bytes": 19483,
+      "sha256": "0f2c48f6de33428704b21a70cd00928fd1d5211efa6f39a94710d958a347c26a"
+    },
+    {
+      "path": "tools/collect_distribution_notices.py",
+      "bytes": 26107,
+      "sha256": "8e1df85a162db8f424c94d7a4c73af6de10d1b20f25531f868a2832e821b1437"
+    },
+    {
+      "path": "tools/corpus_contact_sheet.py",
+      "bytes": 1900,
+      "sha256": "74a80d1e72c589c4c4ba6ee9899bf88e6760a0097b676fe4f6f58fb1866c6cd6"
+    },
+    {
+      "path": "tools/create_live_release.py",
+      "bytes": 6548,
+      "sha256": "2617fdd9cd10ebd986684a37c976e82531645bebe851ac855ac33dc0b2e0fbd3"
+    },
+    {
+      "path": "tools/create_release_manifest.py",
+      "bytes": 10344,
+      "sha256": "6ac1a6166a8cb0a847c5990099571dfe897a65e6fbe6080b07dd129e40df6ac5"
+    },
+    {
+      "path": "tools/create_workbench_release.py",
+      "bytes": 5067,
+      "sha256": "a0c5786cf8c36fc7675bf697626ddb34d58ef4c621f6cc607b6a3b68e5b63581"
+    },
+    {
+      "path": "tools/export_public_source.py",
+      "bytes": 6463,
+      "sha256": "d82203636060749ed510582addca876a5b441f7b40feb5a13c933ae0a522aa3f"
+    },
+    {
+      "path": "tools/import_engineering_library.py",
+      "bytes": 5198,
+      "sha256": "0362df169df99e7e54493abc8dee38a7f5aa7772224d3261a527efe1d2dae084"
+    },
+    {
+      "path": "tools/inspect_png_comparison.py",
+      "bytes": 2650,
+      "sha256": "09ce072ae452848e92fbc012863c1f6929360b328fb192dec3a83e82330114e1"
+    },
+    {
+      "path": "tools/make_long_fixture.py",
+      "bytes": 822,
+      "sha256": "111d28aa390640bfc49f2a867d2506dbef7e6979ec65a1c5d606ff78d6690dc4"
+    },
+    {
+      "path": "tools/package_portable.py",
+      "bytes": 3491,
+      "sha256": "049753f05834ee7d19d12e78f5c05478165a0341eb05b75612313e2b7c2e2daf"
+    },
+    {
+      "path": "tools/prepare_validation.py",
+      "bytes": 1483,
+      "sha256": "5c0da1d3f18647bd304a2849fa61e68748129f5b3821c4aebaf6178bb7b65238"
+    },
+    {
+      "path": "tools/probe_loudness.py",
+      "bytes": 5881,
+      "sha256": "6002ff011361e5f043d3010a39ee423cbc836b470bba56054643bc0b6f39926a"
+    },
+    {
+      "path": "tools/probe_pipeline_resources.py",
+      "bytes": 570,
+      "sha256": "92a36deb55fd4a3e1f0e24263f91c1b7b2eb1c725d5fa1e4911e82ba710618ca"
+    },
+    {
+      "path": "tools/read_corpus_pages.py",
+      "bytes": 1214,
+      "sha256": "c785436efe5bb7eb2ec4c2b51575238c6686a4aca1dc465592af8de0f217d2c3"
+    },
+    {
+      "path": "tools/record_page_review.py",
+      "bytes": 2576,
+      "sha256": "26a5bae24d895d35a13d712d305a533555b8c8e901504b1761b9392043cc6716"
+    },
+    {
+      "path": "tools/run_frozen_acceptance.py",
+      "bytes": 3075,
+      "sha256": "af9c623d41c26919eb26a1a712a48814297b3b3482601fa95a24db8d668e2e52"
+    },
+    {
+      "path": "tools/validate_head_analysis.py",
+      "bytes": 5090,
+      "sha256": "88874bd30e890a8877a32e39603c0ad3a89ea554515a470ed7d4a100a6ba8920"
+    },
+    {
+      "path": "tools/validate_real_calibration.py",
+      "bytes": 4748,
+      "sha256": "b20ecbac3c97d4c3083a00f1781326fbe23bef62adce90038606c7d44d954960"
+    }
+  ]
+}

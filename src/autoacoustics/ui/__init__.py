@@ -1,0 +1,1 @@
+"""Desktop workbench widgets."""

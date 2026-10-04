@@ -1,0 +1,44 @@
+name: Windows source validation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: windows-latest
+    timeout-minutes: 20
+    env:
+      QT_QPA_PLATFORM: offscreen
+      PYTHONUTF8: "1"
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.lock
+      - name: Install FFmpeg for format tests
+        run: choco install ffmpeg --yes --no-progress
+      - name: Install verified dependencies and source
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.lock
+          python -m pip install --no-deps -e .
+      - name: Verify source export
+        run: python tools/export_public_source.py --verify
+      - name: Test public source
+        run: python -m pytest -q -ra --junitxml=output/pytest.xml
+      - name: Build source wheel
+        run: python -m pip wheel --no-deps --no-build-isolation --wheel-dir output/wheels .
+      - name: Retain test results
+        if: always()
+        uses: actions/upload-artifact@v7.0.1
+        with:
+          name: windows-test-results
+          path: output/pytest.xml

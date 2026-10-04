@@ -1,0 +1,286 @@
+{
+  "schema_version": 1,
+  "evidence_scope": "synthetic codec/layout import fidelity; not real instrument validation",
+  "cases": [
+    {
+      "path": "样例.wav",
+      "kind": "wav",
+      "sample_rate": 48000,
+      "channels": 2,
+      "source_frames": 24000,
+      "frame_tolerance": 0,
+      "units": [
+        "FS",
+        "FS"
+      ],
+      "mapping": null,
+      "note": "PCM16 normalized FS",
+      "sha256": "c4ca373dba939fa16ce6593f277e3b983abc0f80286148dcdbc13949db989073"
+    },
+    {
+      "path": "24位.wav",
+      "kind": "wav",
+      "sample_rate": 48000,
+      "channels": 2,
+      "source_frames": 24000,
+      "frame_tolerance": 0,
+      "units": [
+        "FS",
+        "FS"
+      ],
+      "mapping": null,
+      "note": "PCM24 normalized FS",
+      "sha256": "733ead1bb2072bb7723226d46e370a971998a1747fc6951a9635500109b2cf60"
+    },
+    {
+      "path": "浮点.wav",
+      "kind": "wav",
+      "sample_rate": 48000,
+      "channels": 2,
+      "source_frames": 24000,
+      "frame_tolerance": 0,
+      "units": [
+        "FS",
+        "FS"
+      ],
+      "mapping": null,
+      "note": "Float digital samples, ADC full scale unknown",
+      "sha256": "4f0620f6abe813d48342d8f58e132685c5e55cbc908a40492aabf03083d0022c"
+    },
+    {
+      "path": "样例.flac",
+      "kind": "flac",
+      "sample_rate": 48000,
+      "channels": 2,
+      "source_frames": 24000,
+      "frame_tolerance": 0,
+      "units": [
+        "FS",
+        "FS"
+      ],
+      "mapping": null,
+      "note": "Lossless PCM24",
+      "sha256": "8f0ac9f3e02c8175b30dbe5041251b179ca4b44d9bf86ceb7385a0d4b08ffc72"
+    },
+    {
+      "path": "样例.mp3",
+      "kind": "mp3",
+      "sample_rate": 48000,
+      "channels": 2,
+      "source_frames": 24000,
+      "frame_tolerance": 2048,
+      "units": [
+        "FS",
+        "FS"
+      ],
+      "mapping": null,
+      "note": "Actual codec libmp3lame",
+      "sha256": "06f98ea069c6915aa2d1f3ffe6eefa21cbb96d5214e8e936ab6c08ef76ce2d89"
+    },
+    {
+      "path": "样例.m4a",
+      "kind": "m4a",
+      "sample_rate": 48000,
+      "channels": 2,
+      "source_frames": 24000,
+      "frame_tolerance": 2048,
+      "units": [
+        "FS",
+        "FS"
+      ],
+      "mapping": null,
+      "note": "Actual codec aac",
+      "sha256": "75dc845ccad265a29ac2c24d8f77d40da028454cb7d1f861e6c7d9fd9114b223"
+    },
+    {
+      "path": "样例.aac",
+      "kind": "aac",
+      "sample_rate": 48000,
+      "channels": 2,
+      "source_frames": 24000,
+      "frame_tolerance": 2048,
+      "units": [
+        "FS",
+        "FS"
+      ],
+      "mapping": null,
+      "note": "Actual codec aac",
+      "sha256": "e5ab11670e58461ce24ac60248b8ec1bd9516a965298efc48bf8c06a31349766"
+    },
+    {
+      "path": "样例.ogg",
+      "kind": "ogg",
+      "sample_rate": 48000,
+      "channels": 2,
+      "source_frames": 24000,
+      "frame_tolerance": 2048,
+      "units": [
+        "FS",
+        "FS"
+      ],
+      "mapping": null,
+      "note": "Actual codec libvorbis",
+      "sha256": "b0df217a3ef3e04d43a7e124f477aba8c8a332ad2ef98d20c259dab372318996"
+    },
+    {
+      "path": "样例.mp4",
+      "kind": "mp4",
+      "sample_rate": 48000,
+      "channels": 2,
+      "source_frames": 24000,
+      "frame_tolerance": 2048,
+      "units": [
+        "FS",
+        "FS"
+      ],
+      "mapping": null,
+      "note": "Actual codec aac; MPEG4 video",
+      "sha256": "009d30f06cff1486f4a2808ad6f77afd35b0f07e0d843211a01b3722446aa4b6"
+    },
+    {
+      "path": "样例.avi",
+      "kind": "avi",
+      "sample_rate": 48000,
+      "channels": 2,
+      "source_frames": 24000,
+      "frame_tolerance": 0,
+      "units": [
+        "FS",
+        "FS"
+      ],
+      "mapping": null,
+      "note": "Actual codec pcm_s16le; MPEG4 video",
+      "sha256": "4551014b1204e28c90b1e1e8e1c9c68795873198f100e552a5e7a693752125da"
+    },
+    {
+      "path": "样例.mkv",
+      "kind": "mkv",
+      "sample_rate": 48000,
+      "channels": 2,
+      "source_frames": 24000,
+      "frame_tolerance": 0,
+      "units": [
+        "FS",
+        "FS"
+      ],
+      "mapping": null,
+      "note": "Actual codec pcm_s16le; MPEG4 video",
+      "sha256": "e3ad432cc18d57871675258f279d5933a90522583d9a214c6b1d7aecbf03b34c"
+    },
+    {
+      "path": "样例.csv",
+      "kind": "csv",
+      "sample_rate": 48000,
+      "channels": 2,
+      "source_frames": 24000,
+      "frame_tolerance": 0,
+      "units": [
+        "Pa",
+        "V"
+      ],
+      "mapping": null,
+      "note": "Explicit synthetic physical units",
+      "sha256": "fb594398a1baad6dff6509a71f71c62d1267a2e2587ecfda1d1107c92ac93fcf"
+    },
+    {
+      "path": "样例.txt",
+      "kind": "txt",
+      "sample_rate": 48000,
+      "channels": 2,
+      "source_frames": 24000,
+      "frame_tolerance": 0,
+      "units": [
+        "Pa",
+        "V"
+      ],
+      "mapping": null,
+      "note": "Explicit synthetic physical units",
+      "sha256": "ed3a25002af7d0085fa253d7067d39b20091931240bc9fe24e6e3dd378748e54"
+    },
+    {
+      "path": "样例.dat",
+      "kind": "dat",
+      "sample_rate": 48000,
+      "channels": 2,
+      "source_frames": 24000,
+      "frame_tolerance": 0,
+      "units": [
+        "Pa",
+        "V"
+      ],
+      "mapping": {
+        "sample_rate": 48000,
+        "data_columns": [
+          0,
+          1
+        ],
+        "channel_units": [
+          "Pa",
+          "V"
+        ]
+      },
+      "note": "Explicit synthetic physical units",
+      "sha256": "b4b07787367b0f503f6ae16d56e674978cc03f73201fda6e03adfabd475dfb75"
+    },
+    {
+      "path": "样例.mat",
+      "kind": "mat",
+      "sample_rate": 48000,
+      "channels": 2,
+      "source_frames": 24000,
+      "frame_tolerance": 0,
+      "units": [
+        "Pa",
+        "V"
+      ],
+      "mapping": null,
+      "note": "Classic MATLAB numeric matrix with known metadata",
+      "sha256": "3cc1b9164e9dc295f100f4ce9a4e400eacfd7db1b309217f7a5774c338a4ee91"
+    },
+    {
+      "path": "样例.hdf5",
+      "kind": "hdf5",
+      "sample_rate": 48000,
+      "channels": 2,
+      "source_frames": 24000,
+      "frame_tolerance": 0,
+      "units": [
+        "Pa",
+        "V"
+      ],
+      "mapping": null,
+      "note": "Generic HDF5 dataset metadata",
+      "sha256": "34049ceebe304860697b91703fc1f5424cc15b4cce146d62b0dd0af710927b91"
+    },
+    {
+      "path": "MAT73样例.mat",
+      "kind": "mat73",
+      "sample_rate": 48000,
+      "channels": 2,
+      "source_frames": 24000,
+      "frame_tolerance": 0,
+      "units": [
+        "Pa",
+        "V"
+      ],
+      "mapping": null,
+      "note": "Numeric HDF5 layout; MATLAB stored axes reversed",
+      "sha256": "6893363b3db148bc1c41efddcfd5ea7d336d75f25a7bc2b4a8f490a92ea3aaca"
+    },
+    {
+      "path": "样例.tdms",
+      "kind": "tdms",
+      "sample_rate": 48000,
+      "channels": 2,
+      "source_frames": 24000,
+      "frame_tolerance": 0,
+      "units": [
+        "Pa",
+        "V"
+      ],
+      "mapping": null,
+      "note": "Two channels with independent physical units",
+      "sha256": "9a27d58dd969fa6bc2acc327d3a0eb14f3ac4ba30712cd01cbb5a4e438822f3e"
+    }
+  ]
+}
