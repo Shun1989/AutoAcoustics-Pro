@@ -30,7 +30,7 @@ EVENTS={'全事件':'full','启动':'startup','运行':'running','停止':'stop'
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle('AutoAcoustics Pro 0.3.0 · 现场采集与 NVH 工作台')
+        self.setWindowTitle('AutoAcoustics Pro 0.3.1 · 现场采集与 NVH 工作台')
         self.resize(1480,940)
         self.signal=None;self.mapping=None;self.context=MeasurementContext()
         self._signal_channel_hashes={}
@@ -45,6 +45,7 @@ class MainWindow(QMainWindow):
         self.jobs=JobExecutor()
         self.preferences=QSettings('AutoAcoustics','AutoAcousticsPro')
         self.player=SegmentPlayer(self)
+        self._playback_key=None
         self.player.message.connect(self.show_message)
         self.player.positionChanged.connect(lambda value:self.plots.cursor.setValue(value))
         self.player.stateChanged.connect(lambda state:self.playback_state.setText({'playing':'播放中','paused':'已暂停','stopped':'已停止'}.get(state,state)))
@@ -290,6 +291,7 @@ class MainWindow(QMainWindow):
             fft=max(frames,self.fft_combo.currentData())
             self.resolution_label.setText(f'事件物理时长 {1000*frames/self.signal.sample_rate:.2f} ms；全事件 FFT 频点间隔 {self.signal.sample_rate/fft:.3f} Hz。\nFFT 最低点数可补零；补零不会提高实际分辨能力。\nSTFT 窗长 {1000*size/self.signal.sample_rate:.2f} ms；频点间隔 {self.signal.sample_rate/size:.3f} Hz。')
     def _channel_changed(self,*_):
+        self.player.stop()
         self.invalidate_result()
         channel=self.channel_combo.currentData()
         self.analyze_button.setEnabled(self.signal is not None and channel is not None)
@@ -307,6 +309,7 @@ class MainWindow(QMainWindow):
         else:self.unit_label.setText('多通道必须明确选择，程序不自动混音。')
         self._sync_rotation_source()
     def _profile_changed(self,*_):
+        self.player.stop()
         profile=self.selected_profile()
         if profile:self.calibration_label.setText(f'{profile.source}\n{profile.coefficient:.9g} Pa/{profile.input_unit}；日期：{profile.date or "未知"}')
         else:self.calibration_label.setText('Pa 输入保留文件声明；FS/V 未校准时仅显示相对量。')
@@ -349,6 +352,7 @@ class MainWindow(QMainWindow):
         self._start_job('import',{'path':path,'mapping':mapping})
         self.show_message(f'正在导入：{path.name}。原数据只读，保留采样率与通道。')
     def set_signal(self,signal):
+        self.player.stop()
         self._updating=True
         if self._pending_import:self.mapping=self._pending_import[1]
         self.signal=signal;self._pending_import=None;self._signal_channel_hashes={}
@@ -634,6 +638,7 @@ class MainWindow(QMainWindow):
         # list is refreshed. Filtered rows must always resolve via their IDs.
         if item is None and self.repeat_filter.currentData()=='all':index=row
         if isinstance(index,int) and 0<=index<len(self.results):
+            self.player.stop()
             result=self.results[index]
             if self._source_matches_result(result):
                 self._restore_controls(result)
@@ -679,22 +684,36 @@ class MainWindow(QMainWindow):
 
     def play_visible(self):
         if self._view_comparison and self.comparison is not None:self.play_result(self.comparison.right)
+        elif self._history_selected and self.current_result is not None and not self._source_matches_result(self.current_result):
+            self.play_result(self.current_result)
         else:self.play_current()
     def play_current(self):
         try:
-            settings=self.analysis_settings();values=self.signal.samples[settings.channel]
-            if self.selected_profile() or self.signal.channels[settings.channel].unit=='Pa':
+            settings=self.analysis_settings();profile=self.selected_profile()
+            key=('source',id(self.signal),settings.channel,settings.start,settings.end,
+                 profile,self.playback_gain.value())
+            if self._playback_key==key and self.player.state in {'paused','playing'}:
+                self.player.play();return
+            values=self.signal.samples[settings.channel]
+            if profile or self.signal.channels[settings.channel].unit=='Pa':
                 from ..calibration import apply_calibration
-                values=apply_calibration(self.signal,self.selected_profile(),channel=settings.channel).samples[0]
-            self.player.set_segment(values,self.signal.sample_rate,settings.start,settings.end,self.playback_gain.value(),time_origin=self.signal.time_origin);self.player.play()
-        except Exception as error:self.show_message(error)
+                values=apply_calibration(self.signal,profile,channel=settings.channel).samples[0]
+            self.player.set_segment(values,self.signal.sample_rate,settings.start,settings.end,self.playback_gain.value(),time_origin=self.signal.time_origin)
+            self._playback_key=key;self.player.play()
+        except Exception as error:self.player.stop();self.show_message(error)
     def play_result(self,result):
         try:
             if result is None or result.detail is None:raise ValueError('此结果没有试听详情；需明确重算或恢复已存缓存。')
+            key=('result',id(result.detail),result.result_id,self.playback_gain.value())
+            if self._playback_key==key and self.player.state in {'paused','playing'}:
+                self.player.play();return
             arrays=result.detail.arrays;time=np.asarray(arrays['wave_time']);values=np.asarray(arrays['waveform'])
             if len(time)<2:raise ValueError('试听区间过短。')
-            rate=1/(time[1]-time[0]);self.player.set_segment(values,rate,gain=self.playback_gain.value());self.player.origin=float(time[0]);self.player.play()
-        except Exception as error:self.show_message(error)
+            rate=result.provenance.get('sample_rate')
+            if rate is None:rate=1/(time[1]-time[0])
+            self.player.set_segment(values,rate,gain=self.playback_gain.value());self.player.origin=float(time[0])
+            self._playback_key=key;self.player.play()
+        except Exception as error:self.player.stop();self.show_message(error)
 
     def add_to_batch(self):
         try:self.batch_panel.add_item(self.current_item());self.workspace.setCurrentWidget(self.batch_panel)

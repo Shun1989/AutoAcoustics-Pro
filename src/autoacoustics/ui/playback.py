@@ -40,11 +40,13 @@ class SegmentPlayer(QObject):
         self.gain = gain
 
     def play(self):
+        if self.state == 'playing':
+            return
         if self.state == 'paused' and self.sink:
-            self.sink.resume()
-            self.state = 'playing'
-            self.timer.start()
-            self.stateChanged.emit(self.state)
+            output = self.sink
+            output.resume()
+            if self.sink is output:
+                self._started(output)
             return
         if self.samples is None:
             self.message.emit('请先选择录音和试听区间。')
@@ -63,43 +65,82 @@ class SegmentPlayer(QObject):
         audio, clipped = prepare_playback(self.samples, self.gain)
         if clipped:
             self.message.emit(f'试听增益超范围，{clipped:.1%} 样本被限制；请降低增益。分析数据未改变。')
+        # A finished output still owns its buffer until explicitly released.
+        self.stop()
         self.buffer = QBuffer(self)
         self.buffer.setData(QByteArray(audio.tobytes()))
         self.buffer.open(QIODevice.OpenModeFlag.ReadOnly)
         self.sink = QAudioSink(device, format, self)
-        self.sink.stateChanged.connect(self._sink_state)
-        self.sink.start(self.buffer)
+        output = self.sink
+        output.stateChanged.connect(lambda state: self._sink_state(state, output))
+        try:
+            output.start(self.buffer)
+        except Exception as error:
+            self.stop()
+            self.message.emit(f'音频播放失败：{error}')
+            return
+        if self.sink is output:
+            self._started(output)
+
+    def _started(self, output):
+        if output.error() != QAudio.Error.NoError:
+            self._output_failed(output.error())
+            return
+        if output.state() == QAudio.State.StoppedState:
+            self.stop()
+            self.message.emit('音频播放失败：系统播放设备未启动，请检查设备后重试。')
+            return
+        if output.state() == QAudio.State.IdleState:
+            return
         self.state = 'playing'
         self.timer.start()
         self.stateChanged.emit(self.state)
 
     def pause(self):
         if self.sink and self.state == 'playing':
-            self.sink.suspend()
-            self.state = 'paused'
-            self.timer.stop()
-            self.stateChanged.emit(self.state)
+            output = self.sink
+            output.suspend()
+            if self.sink is output:
+                if output.error() != QAudio.Error.NoError:
+                    self._output_failed(output.error())
+                elif output.state() == QAudio.State.SuspendedState:
+                    self.state = 'paused'
+                    self.timer.stop()
+                    self.stateChanged.emit(self.state)
 
     def stop(self):
         self.timer.stop()
-        if self.sink:
-            self.sink.stop()
-            self.sink.deleteLater()
-            self.sink = None
-        if self.buffer:
-            self.buffer.close()
-            self.buffer.deleteLater()
-            self.buffer = None
+        output, buffer = self.sink, self.buffer
+        # stop() emits stateChanged synchronously on some audio backends.
+        self.sink = self.buffer = None
+        if output:
+            output.stop()
+            output.deleteLater()
+        if buffer:
+            buffer.close()
+            buffer.deleteLater()
         self.state = 'stopped'
         self.stateChanged.emit(self.state)
 
     def _update_cursor(self):
         if self.sink:
-            self.positionChanged.emit(self.origin + self.sink.processedUSecs() / 1e6)
+            elapsed = min(self.sink.processedUSecs() / 1e6, len(self.samples) / self.sample_rate)
+            self.positionChanged.emit(self.origin + elapsed)
 
-    def _sink_state(self, state):
+    def _output_failed(self, error):
+        self.stop()
+        self.message.emit(f'音频播放失败（{error.name}）：请检查系统播放设备后重试。')
+
+    def _sink_state(self, state, output):
+        if output is not self.sink:
+            return
         if state == QAudio.State.IdleState:
             self._update_cursor()
             self.timer.stop()
             self.state = 'stopped'
             self.stateChanged.emit(self.state)
+        elif state == QAudio.State.StoppedState:
+            if output.error() != QAudio.Error.NoError:
+                self._output_failed(output.error())
+            else:
+                self.stop()

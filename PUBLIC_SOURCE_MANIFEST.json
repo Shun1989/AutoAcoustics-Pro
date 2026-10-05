@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "version": "0.3.0",
+  "version": "0.3.1",
   "license": "GPL-3.0-only",
   "scope": "Public source snapshot; original local Git history is not exported.",
   "excluded": [
@@ -46,8 +46,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 6319,
-      "sha256": "5b2414039a6db5db58f730616989c687f1f3b2082a133194dbe09a2dabc985b2"
+      "bytes": 6612,
+      "sha256": "4f1cadbbc24a7f77a2eed197034bc259361a7d87819a2e8c0cc4d07cb3d2372c"
     },
     {
       "path": "REWRITE_PRODUCT_SPEC.md",
@@ -57,7 +57,7 @@
     {
       "path": "THIRD_PARTY_NOTICES.md",
       "bytes": 2169,
-      "sha256": "cfbbb14bd65b6cf4cc189e8f4fb59421e20efd8fedc3e442b8dbc27833d04d92"
+      "sha256": "a5a3889f38b245f97cf290a71d9c055422e0173488b883bd67fa83ad5b32b577"
     },
     {
       "path": "docs/open_source/ARCHITECTURE.md",
@@ -66,18 +66,18 @@
     },
     {
       "path": "docs/open_source/README.md",
-      "bytes": 6406,
-      "sha256": "b73163b277aa61f516985d00797ec35e1ec7a8042ab5f26a4987bef23510650c"
+      "bytes": 6701,
+      "sha256": "88560ada80d3f1641390ff4d184d2d2eccb758dfc5b78865c102aa4067a616ec"
     },
     {
       "path": "docs/open_source/THIRD_PARTY_NOTICES.md",
       "bytes": 2169,
-      "sha256": "cfbbb14bd65b6cf4cc189e8f4fb59421e20efd8fedc3e442b8dbc27833d04d92"
+      "sha256": "a5a3889f38b245f97cf290a71d9c055422e0173488b883bd67fa83ad5b32b577"
     },
     {
       "path": "docs/open_source/VALIDATION.md",
-      "bytes": 1633,
-      "sha256": "2609d0dd81a4212662d04c95d5e8725577502976098c7da26ffcc3b70faef4ea"
+      "bytes": 2064,
+      "sha256": "b1f19dd4e51d3086d6f859fffe18aaf1bf1f11b09134362bb5425fc102f57ec2"
     },
     {
       "path": "docs/open_source/ci.yml",
@@ -97,7 +97,7 @@
     {
       "path": "pyproject.toml",
       "bytes": 920,
-      "sha256": "231d5314c74ca8a27b991738560f4f2c71941c2ec8af04fc2eb35380594e5d93"
+      "sha256": "5369d0608483a157fc1f748a81d11d10e30467f27cc6f2489a8448c21840d351"
     },
     {
       "path": "requirements.lock",
@@ -107,7 +107,7 @@
     {
       "path": "src/autoacoustics/__init__.py",
       "bytes": 79,
-      "sha256": "dca9ea3d4aade1e1546127006899e823d78d09df369c9cea88b660301c168214"
+      "sha256": "5b0c2189158d9cdd05f598412b8f25d6ae3bb4f2a785ab672e6579c9931db0e3"
     },
     {
       "path": "src/autoacoustics/acquisition/__init__.py",
@@ -386,28 +386,28 @@
     },
     {
       "path": "src/autoacoustics/ui/main_window.py",
-      "bytes": 64458,
-      "sha256": "ef509e859bfbbe3eefb30b745a6b7fd22b9a175cea82666075e533d4126be7dc"
+      "bytes": 65470,
+      "sha256": "61c5db35fa1596b7c4a2bf8dbe1b215d7aebdf7773b8ffc6a6ce8e5e71295734"
     },
     {
       "path": "src/autoacoustics/ui/playback.py",
-      "bytes": 4252,
-      "sha256": "9f507b5e7702ea3a6c89634211888d93bf55c17f5ce813912df02342552029a7"
+      "bytes": 5954,
+      "sha256": "0732504a4ae5080c62c8a440bd2b158caee9ec49d24748d2d272a9294807f28f"
     },
     {
       "path": "src/autoacoustics/ui/plots.py",
-      "bytes": 28031,
-      "sha256": "9cbbd20e88ac2efe35596cb2d847fc050e2d0b01725bc3348b861eb36dbd3d0d"
+      "bytes": 28037,
+      "sha256": "fdf03bf0ab0fd4d3cc62cf6618faafc964e5e40b8e4f328f31f763bdde577120"
     },
     {
       "path": "src/autoacoustics/ui/rotation_panel.py",
-      "bytes": 24996,
-      "sha256": "0223ee02a262d29713b6f39cdbca560c7c0cb1e6d15927ea28d5840733ee56ca"
+      "bytes": 26060,
+      "sha256": "95f9fbb133e6cadb90ff70f30a2261fd169cff00b1ba6c0613033fc8e89e8b79"
     },
     {
       "path": "src/autoacoustics/ui/soundcard_panel.py",
-      "bytes": 26840,
-      "sha256": "fdabf5c3f7fd51cf021ac7b82d805bbb6997a9209f55471686051d5ed4b4a96d"
+      "bytes": 29540,
+      "sha256": "ca14cd0d4fd8efc4627fe787a358c571aaef1a790caa1fd389ed5564a12c2a3b"
     },
     {
       "path": "src/autoacoustics/ui/window_geometry.py",
@@ -730,6 +730,11 @@
       "sha256": "c24ade5546ab15767144fb17bc73d22f001c89c4cde35279304afac9efd68ac9"
     },
     {
+      "path": "tests/test_playback_state.py",
+      "bytes": 8536,
+      "sha256": "f44910b266ba4ced4a90e6fa9f4c97be6adc220deb72e89b9f420703e76d8877"
+    },
+    {
       "path": "tests/test_plot_dashboard.py",
       "bytes": 11980,
       "sha256": "0ff9522b2004874de7bee06cdfa332a2423d6a8902cbf9dee1070b1b724fba13"
@@ -780,9 +785,19 @@
       "sha256": "44219c1c5c6e067c7def7135a3ca28691138e80dc0b74ce2d323529f4c4ba9a1"
     },
     {
+      "path": "tests/test_rotation_workflow.py",
+      "bytes": 6696,
+      "sha256": "c0e7484d4d8478db2bb7b1614a28f6c2e1460dc74aaa3f0077b2c435e9dbb91b"
+    },
+    {
       "path": "tests/test_soundcard.py",
       "bytes": 17517,
       "sha256": "f128f8deafe120a7d075c370b925de1cf6dd586f921a641fbe0481f516f09485"
+    },
+    {
+      "path": "tests/test_soundcard_workflow.py",
+      "bytes": 9209,
+      "sha256": "ac68b23ee78f82b536ed2cc1cc5bd9828fea723bfb6dc241ac186171542112cf"
     },
     {
       "path": "tests/test_spectrum.py",
@@ -856,8 +871,8 @@
     },
     {
       "path": "tools/create_live_release.py",
-      "bytes": 6548,
-      "sha256": "2617fdd9cd10ebd986684a37c976e82531645bebe851ac855ac33dc0b2e0fbd3"
+      "bytes": 7067,
+      "sha256": "c87aebb093e7b44c7b8b9d8e132bc8abccaddc5d856a69ddde64f647979cf9b3"
     },
     {
       "path": "tools/create_release_manifest.py",
@@ -871,8 +886,8 @@
     },
     {
       "path": "tools/export_public_source.py",
-      "bytes": 7179,
-      "sha256": "944533a01d9d2598d421c1dabfa827f9f2aea2f746a6854571f7fffd3d018434"
+      "bytes": 7297,
+      "sha256": "f734d34db4f82d186248c2cb2c0d92589540f1663b6b46cebbef0e7efe652048"
     },
     {
       "path": "tools/import_engineering_library.py",
@@ -921,8 +936,8 @@
     },
     {
       "path": "tools/run_frozen_acceptance.py",
-      "bytes": 3075,
-      "sha256": "af9c623d41c26919eb26a1a712a48814297b3b3482601fa95a24db8d668e2e52"
+      "bytes": 4088,
+      "sha256": "54877466b1b7c86a0c7591ba9dbe2deea95952cfe4b12c4e851e0b623bb4f802"
     },
     {
       "path": "tools/validate_head_analysis.py",

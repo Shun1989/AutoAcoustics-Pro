@@ -155,8 +155,9 @@ class RotationPanel(QWidget):
         results_layout.addWidget(self.status_label)
         result_actions=QHBoxLayout()
         repeat=QPushButton('返回参数');repeat.clicked.connect(lambda:self.controls_tabs.setCurrentIndex(0))
-        export=QPushButton('导出诊断报告');export.clicked.connect(self._choose_export)
-        result_actions.addWidget(repeat);result_actions.addWidget(export);results_layout.addLayout(result_actions)
+        self.result_export_button=QPushButton('导出诊断报告')
+        self.result_export_button.clicked.connect(self._choose_export)
+        result_actions.addWidget(repeat);result_actions.addWidget(self.result_export_button);results_layout.addLayout(result_actions)
         for widget in (self.rpm_spin, self.gear_teeth_spin, self.gear_ratio_spin,
                        self.pole_pairs_spin, self.max_order_spin):
             widget.valueChanged.connect(self._parameters_changed)
@@ -209,8 +210,10 @@ class RotationPanel(QWidget):
 
     def _enable_controls(self):
         self.analyze_button.setEnabled(self.signal is not None and not self.is_analyzing and not self._closing)
-        self.export_button.setEnabled(bool(self.result is not None and not self.result_stale and
-                                           not self.is_analyzing and self._export_worker is None))
+        can_export = bool(self.result is not None and not self.result_stale and
+                          not self.is_analyzing and self._export_worker is None and not self._closing)
+        for button in (self.export_button, self.result_export_button):
+            button.setEnabled(can_export)
         measured = self.rpm_source_combo.currentData() == 'measured'
         self.rpm_spin.setEnabled(not measured)
         self.rpm_csv_path.setEnabled(measured)
@@ -224,6 +227,7 @@ class RotationPanel(QWidget):
         self.result_stale = True
         self.status_label.setText(reason)
         self.export_button.setEnabled(False)
+        self.result_export_button.setEnabled(False)
         self.overlayReady.emit({'stale':True, 'source_hash':self.signal.source_hash if self.signal else '',
                                 'channel':self.channel, 'selection_seconds':self.selection_seconds})
         if clear:
@@ -386,6 +390,10 @@ class RotationPanel(QWidget):
             '；'.join(f'{peak.order:.3g} 阶 / {peak.frequency:.3g} Hz / {peak.level_db:.1f} dB' for peak in result.peaks[:10]))
 
     def _export_snapshot(self):
+        if self._closing:
+            raise ValueError('窗口正在关闭，不能开始新的诊断导出。')
+        if self._export_worker is not None:
+            raise ValueError('诊断报告正在导出，请等待当前导出完成。')
         if self.result is None or self.result_stale or self.is_analyzing or self._result_snapshot is None:
             raise ValueError('诊断结果已过期或尚未完成，请重新分析当前来源和参数。')
         return self.result, dict(self._result_snapshot)
@@ -435,6 +443,11 @@ class RotationPanel(QWidget):
             'Word 报告 (*.docx);;原参数与结果 JSON (*.json);;HTML 报告 (*.html)')
         if not path:
             return
+        # A native file dialog runs a nested event loop: closing or another
+        # export can occur after the first snapshot guard and before it returns.
+        if self._closing or self._export_worker is not None:
+            self.status_label.setText('窗口正在关闭或已有诊断报告在导出，本次导出未开始。')
+            return
         self._export_worker = _RotationTask(lambda:self._write_export(result, snapshot, path), self)
         self._export_worker.succeeded.connect(self._export_completed)
         self._export_worker.failed.connect(self._export_failed)
@@ -450,13 +463,18 @@ class RotationPanel(QWidget):
         self.status_label.setText(f'报告导出失败：{message}；请检查目标目录和文件权限。')
 
     def _export_finished(self):
-        if self._export_worker:
-            self._export_worker.deleteLater()
+        worker = self.sender()
+        if worker is not None:
+            worker.deleteLater()
+        # A delayed completion only owns its emitting task. Never delete or
+        # clear a newer task, which must continue blocking window destruction.
+        if worker is self._export_worker:
             self._export_worker = None
         self._enable_controls()
 
     def shutdown(self):
         self._closing = True
+        self._enable_controls()
         if self.is_analyzing or self._export_worker is not None:
             return False
         for dialog in tuple(self._dialogs):

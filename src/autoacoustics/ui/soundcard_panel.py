@@ -51,6 +51,8 @@ class SoundCardPanel(QWidget):
         self._engine = self._starter = self._exporter = None
         self._stop_requested = self._closing = False
         self._wav_started = False
+        self._preferred_device_identity = None
+        self._preferred_channels = self._preferred_rate = None
         self._emitted = set()
         self.completed_manifest = self.completed_wav = None
         self.preview_frames = 0
@@ -241,6 +243,12 @@ class SoundCardPanel(QWidget):
     def refresh_devices(self):
         if self.is_recording:
             return
+        previous = self.device_combo.currentData()
+        identity = self._device_identity(previous) if previous else self._preferred_device_identity
+        if previous is not None:
+            self._preferred_channels = self.channel_combo.currentData()
+            self._preferred_rate = self.rate_combo.currentText()
+        selected_channels, requested_rate = self._preferred_channels, self._preferred_rate
         try:
             result = self._discovery_fn()
         except Exception as error:
@@ -254,27 +262,49 @@ class SoundCardPanel(QWidget):
             default = ' · 默认' if meta.get('is_default_input') else ''
             self.device_combo.addItem(f"{meta.get('host_api', 'Host API 未知')} · {device.name}{default}", device)
         if devices:
-            selected = next((i for i,d in enumerate(devices) if 'WASAPI' in str(d.metadata.get('host_api', '')).upper()),
-                next((i for i,d in enumerate(devices) if d.metadata.get('is_default_input')), 0))
+            if identity is not None:
+                matches = [i for i, device in enumerate(devices) if self._device_identity(device) == identity]
+                selected = matches[0] if len(matches) == 1 else -1
+            else:
+                selected = next((i for i,d in enumerate(devices) if 'WASAPI' in str(d.metadata.get('host_api', '')).upper()),
+                    next((i for i,d in enumerate(devices) if d.metadata.get('is_default_input')), 0))
             self.device_combo.setCurrentIndex(selected)
-            self.status_label.setText('已列出真实输入。采样率须在开始时通过设备检查；声卡 FS 不等于 Pa。')
+            self.status_label.setText('已列出真实输入。采样率须在开始时通过设备检查；声卡 FS 不等于 Pa。'
+                if selected >= 0 else '此前选择的输入已不可用或出现同名设备，无法确认测量来源；请重新选择输入设备。')
         elif result:
             self.status_label.setText(result.reason or '没有可用音频输入；请连接麦克风并开启 Windows 麦克风权限。')
         self.device_combo.blockSignals(False)
         self._device_changed()
+        if identity is not None and self.device_combo.currentData() is not None:
+            channel_index = next((i for i in range(self.channel_combo.count())
+                if self.channel_combo.itemData(i) == selected_channels), -1)
+            if channel_index >= 0:
+                self.channel_combo.setCurrentIndex(channel_index)
+            if requested_rate is not None:
+                self.rate_combo.setCurrentText(requested_rate)
         self._enable_controls()
+
+    @staticmethod
+    def _device_identity(device):
+        # PortAudio indices may change after reconnect. It exposes no portable
+        # serial number, so identical names/API/channel counts are ambiguous.
+        return (device.name, str(device.metadata.get('host_api', '')),
+                int(device.metadata.get('max_input_channels', len(device.physical_channels))))
 
     def _device_changed(self, *unused):
         self.channel_combo.clear()
         device = self.device_combo.currentData()
         if device is None:
+            self._enable_controls()
             return
+        self._preferred_device_identity = self._device_identity(device)
         count = int(device.metadata.get('max_input_channels', len(device.physical_channels)))
         for channel in range(count):
             self.channel_combo.addItem(f'输入 {channel+1}（index {channel}）', (channel,))
         if count >= 2:
             self.channel_combo.addItem('双通道：输入 1 + 2', (0, 1))
         self.rate_combo.setCurrentText(str(int(float(device.metadata.get('default_samplerate', 48000)))))
+        self._enable_controls()
 
     def _choose_directory(self):
         directory = QFileDialog.getExistingDirectory(self, '选择录制保存父目录', self.save_parent.text())
@@ -336,6 +366,9 @@ class SoundCardPanel(QWidget):
         self.preview_meters = {}
         self.metrics_label.setText('等待当前录制数据 · Peak / RMS dBFS：—；FS 未校准')
         self.completed_manifest = self.completed_wav = None
+        for field in (self.listen_start, self.listen_end):
+            field.setRange(0, 86400)
+            field.setValue(0)
         self._engine = None
         self._stop_requested = self._wav_started = False
         self.status_label.setText('正在检查设备 / 权限并建立原始录制会话…')
@@ -343,7 +376,12 @@ class SoundCardPanel(QWidget):
             backend = self._backend_factory(int(device.metadata['device_index']), tuple(indices))
             engine = RecordingEngine(backend, config, directory)
             try:
-                engine.configure()
+                configured = engine.configure()
+                if target is not None and not math.isclose(configured.actual_sample_rate, rate, rel_tol=0, abs_tol=1e-9):
+                    raise AcquisitionError(
+                        f'固定时长录制请求 {rate:g} Hz，但驱动实际回读 {configured.actual_sample_rate:g} Hz；'
+                        f'为确保录制秒数正确，尚未开始采集。请将请求采样率改为 {configured.actual_sample_rate:g} Hz 后重试。',
+                        flag='fixed_duration_clock_mismatch')
                 engine.start()
                 return engine
             except Exception:
@@ -365,6 +403,7 @@ class SoundCardPanel(QWidget):
 
     def _recording_failed(self, message):
         self.status_label.setText(f'录制未完成：{message}；请检查设备占用、Windows 麦克风权限、USB 连接及采样率。')
+        self.timer.stop()
 
     def _starter_finished(self):
         if self._starter:
@@ -394,6 +433,9 @@ class SoundCardPanel(QWidget):
             self.status_label.setText(f'{state} · 实际 {rate:g} Hz · {duration:.2f} s · 已读 {session.frames_read} / 已写 {session.frames_written} 帧')
         elif session.status == AcquisitionStatus.COMPLETE and not self._wav_started:
             self.completed_manifest = session.manifest_path
+            self.listen_start.setRange(0, duration)
+            self.listen_end.setRange(0, duration)
+            self.listen_start.setValue(0)
             self.listen_end.setValue(duration)
             self._start_wav_export()
         elif session.status == AcquisitionStatus.FAILED:

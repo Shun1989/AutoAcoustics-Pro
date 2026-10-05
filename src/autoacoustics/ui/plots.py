@@ -453,7 +453,7 @@ class PlotPanel(QWidget):
         for index,marker in enumerate(payload.get('markers',[])[:12]):
             frequency=float(marker['frequency']);order=float(marker['order'])
             if not np.isfinite(frequency) or frequency<=0 or frequency>nyquist:continue
-            label=str(marker['label'])+(' · 中位转速' if tracked else '')
+            label=str(marker['label'])+(' · 时间平均转速' if tracked else '')
             color=colors[index%len(colors)];pen=pg.mkPen(color,width=1,style=Qt.PenStyle.DashLine)
             vertical=pg.InfiniteLine(pos=frequency,angle=90,pen=pen,label=label,
                 labelOpts={'position':.92,'color':color,'rotateAxis':(1,0)})

@@ -7,6 +7,8 @@ from pathlib import Path
 import re
 import shutil
 
+from autoacoustics import __version__
+
 ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -28,11 +30,16 @@ def main():
     parser.add_argument('--bundle', type=Path, default=ROOT/'dist/AutoAcousticsProLive')
     parser.add_argument('--live', type=Path, default=ROOT/'output/live-nvh-fixed-frozen')
     parser.add_argument('--regression', type=Path, default=ROOT/'output/live-regression-fixed-frozen')
+    parser.add_argument('--snapshot', type=Path, default=ROOT/'output/live_build_source_snapshot.json')
+    parser.add_argument('--test-log', type=Path, default=ROOT/'output/live_pytest_fixed_final.log')
+    parser.add_argument('--repeat-prefix', type=Path, default=ROOT/'output/live-repeat-exit-')
+    parser.add_argument('--version', default=__version__)
     options = parser.parse_args()
+    require(options.version==__version__, 'Release version does not match current product source')
     bundle = options.bundle.resolve()
     executable = bundle/(bundle.name+'.exe')
     exe_hash = digest(executable)
-    snapshot = read(ROOT/'output/live_build_source_snapshot.json')
+    snapshot = read(options.snapshot)
     require(snapshot['source_unchanged_during_build'] and snapshot['exe_sha256']==exe_hash,
             'Build snapshot does not match executable')
     for name, expected in snapshot['product_source_sha256'].items():
@@ -52,18 +59,20 @@ def main():
     require(consistency['passed'], 'Reports differ from computed results')
     repetitions = []
     for index in (1,2,3):
-        directory = ROOT/f'output/live-repeat-exit-{index}'
+        directory = Path(str(options.repeat_prefix)+str(index))
         invocation = read(directory/'invocation.json')
         workflow = read(directory/'live_nvh_validation.json')
         require(invocation['exit_code']==0 and invocation['exe_sha256']==exe_hash
                 and invocation['exe_unchanged'] and workflow['passed'],
                 'Repeated process exit failed')
         repetitions.append(invocation)
-    log_path = ROOT/'output/live_pytest_fixed_final.log'
+    log_path = options.test_log
     log = log_path.read_text(encoding='utf-8')
     match = re.search(r'(\d+) passed, (\d+) skipped, (\d+) warnings, (\d+) subtests passed in ([\d.]+)s',log)
     require(match is not None and 'Fatal Python error' not in log
-            and 'fatal exception' not in log, 'Full source suite did not complete')
+            and 'fatal exception' not in log
+            and not re.search(r'\b[1-9]\d* (?:failed|errors?)\b',log),
+            'Full source suite did not complete successfully')
     original = {'spec':digest(ROOT/'REWRITE_PRODUCT_SPEC.md'),
                 'audio_archive':digest(ROOT/'压缩.zip')}
     require(original['spec']=='3d1e135cdb1b4a967c8aab334086f1d3297ef79ef409cf0b9eb51e04de7d1f64', 'Original spec changed')
@@ -79,7 +88,7 @@ def main():
               (options.regression/'bundle_validation.json','frozen_bundle_validation.json'),
               (options.regression/'invocation.json','regression_invocation.json'),
               (options.regression/'report_consistency.json','report_consistency.json'),
-              (ROOT/'output/live_build_source_snapshot.json','build_source_snapshot.json'),
+              (options.snapshot,'build_source_snapshot.json'),
               (log_path,'source_tests.txt')]
     for source,name in copies:
         shutil.copyfile(source,bundle/name)
@@ -90,7 +99,7 @@ def main():
         shutil.copyfile(source,screenshots/source.name)
     for source in options.regression.glob('desktop_*.png'):
         shutil.copyfile(source,screenshots/('regression_'+source.name))
-    manifest = {'schema_version':1,'version':'0.3.0',
+    manifest = {'schema_version':1,'version':options.version,
         'created_at_utc':datetime.now(timezone.utc).isoformat(),'exe_sha256':exe_hash,
         'scope':'Live soundcard recording, rotational NVH evidence, local engineering knowledge',
         'source_snapshot':snapshot,'original_inputs_sha256':original,

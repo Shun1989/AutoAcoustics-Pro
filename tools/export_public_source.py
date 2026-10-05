@@ -11,6 +11,7 @@ import json
 from pathlib import Path
 import re
 import shutil
+import tomllib
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = 'PUBLIC_SOURCE_MANIFEST.json'
@@ -126,7 +127,8 @@ def main():
         'tests/reference/upstream/*\n!tests/reference/upstream/LICENSE.mosqito.txt\n',
         encoding='utf-8')
     relative_names = sorted([*selected, '.gitattributes', '.gitignore'])
-    manifest = {'schema_version': 1, 'version': '0.3.0', 'license': 'GPL-3.0-only',
+    version = tomllib.loads((ROOT/'pyproject.toml').read_text(encoding='utf-8'))['project']['version']
+    manifest = {'schema_version': 1, 'version': version, 'license': 'GPL-3.0-only',
                 'scope': 'Public source snapshot; original local Git history is not exported.',
                 'excluded': ['real audio', 'private calibration profiles', 'customer reports',
                              'engineering PDF/text/page images', 'knowledge databases',
