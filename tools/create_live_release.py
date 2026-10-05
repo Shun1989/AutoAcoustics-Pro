@@ -6,10 +6,11 @@ import json
 from pathlib import Path
 import re
 import shutil
-
-from autoacoustics import __version__
+import sys
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT/'src'))
+from autoacoustics import __version__
 
 
 def digest(path):

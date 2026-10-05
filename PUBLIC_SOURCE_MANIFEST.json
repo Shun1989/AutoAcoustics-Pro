@@ -871,8 +871,8 @@
     },
     {
       "path": "tools/create_live_release.py",
-      "bytes": 7067,
-      "sha256": "c87aebb093e7b44c7b8b9d8e132bc8abccaddc5d856a69ddde64f647979cf9b3"
+      "bytes": 7113,
+      "sha256": "b210843f25b0c1216bb8c3c559ff3e09efc22d7012a60306a0952ad753b0a9c4"
     },
     {
       "path": "tools/create_release_manifest.py",
